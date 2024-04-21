@@ -7,4 +7,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root "static_pages#top"
+  get 'terms', to: 'static_pages#terms'
+  get 'privacy_policy', to: 'static_pages#privacy_policy'
 end
