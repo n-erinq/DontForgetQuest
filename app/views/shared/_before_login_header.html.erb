@@ -1,11 +1,11 @@
 <header>
-<div class="navbar" style="background-color: #3E95B1; color: #fff;">
+<div class="navbar" style="background-color: #EB0F0F; color: #fff;">
   <div class="flex-1">
-    <a class="btn btn-ghost text-xl">DontForgetQuest</a>
+    <%= link_to "ワ ス レ ナ ク エ ス ト", root_path, class: "btn btn-ghost text-xl" %>
   </div>
   <div class="flex-none">
     <ul class="menu menu-horizontal px-1">
-      <li><a>LOGIN</a></li>
+      <li><%= link_to "LOG IN", new_user_session_path %></li>
       <li>
         <details>
           <summary>
