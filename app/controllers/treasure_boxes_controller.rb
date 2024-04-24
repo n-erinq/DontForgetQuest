@@ -1,5 +1,6 @@
 class TreasureBoxesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_treasure_box, only: %i[edit update]
 
   def new
     @treasure_box = TreasureBox.new
@@ -13,10 +14,21 @@ class TreasureBoxesController < ApplicationController
         redirect_to user_path(current_user), success: 'アワードを作成しました'
       else
         flash.now[:danger] = 'アワードを作成できませんでした'
-        render :new
+        render :new, status: :unprocessable_entity
       end
       else
         redirect_to root_path, alert: 'ログインしてください'
+    end
+  end
+
+  def edit; end
+
+  def update
+    if @treasure_box.update(treasure_box_params)
+      redirect_to user_path(current_user), success: 'アワードを編集しました'
+    else
+      flash.now[:danger] = 'アワードを編集できませんでした'
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -24,6 +36,11 @@ class TreasureBoxesController < ApplicationController
 
   def treasure_box_params
     params.require(:treasure_box).permit(award_ids:[])
+  end
+
+  def set_treasure_box
+    @user = current_user
+    @treasure_box = @user.treasure_box
   end
 
 end

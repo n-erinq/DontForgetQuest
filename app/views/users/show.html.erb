@@ -1,7 +1,7 @@
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <%= image_tag 'brave.png', class: "mx-auto h-10 w-auto", size: "36x36" %>
-    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">ユーザー管理</h2>
+    <h2 class="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">ユーザー管理</h2>
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
@@ -13,7 +13,7 @@
     <%= button_to "チェックリスト作成", "#", method: :get, class: "btn btn-primary btn-wide" %>
   </div>
   <div class="my-4">
-    <% if @treasure_box.present? %>
+    <% if @treasure_box.present? && !@treasure_box.opened %>
       <%= button_to "アワード編集", edit_treasure_box_path, method: :get, class: "btn btn-accent btn-wide" %>
     <% else %>
       <%= button_to "アワード作成", new_treasure_box_path, method: :get, class: "btn btn-accent btn-wide" %>
