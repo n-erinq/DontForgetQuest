@@ -1,6 +1,30 @@
-<p>こんにちは <%= @user.name %> さん！</p>
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <%= image_tag 'brave.png', class: "mx-auto h-10 w-auto", size: "36x36" %>
+    <h2 class="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">ユーザー管理</h2>
+  </div>
 
-<p>チェックリスト作成</p>
-<p>アワード作成</p>
-<%= button_to "ユーザ編集", edit_user_registration_path, method: :get, class: "btn btn-secondary" %>
-<p>達成記録閲覧画面</p>
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
+    <div class="my-4">
+      <p>こんにちは <%= @user.name %> さん！</p>
+    </div>
+
+  <div class="my-4">
+    <%= button_to "チェックリスト作成", "#", method: :get, class: "btn btn-primary btn-wide" %>
+  </div>
+  <div class="my-4">
+    <% if @treasure_box.present? && !@treasure_box.opened %>
+      <%= button_to "アワード編集", edit_treasure_box_path, method: :get, class: "btn btn-accent btn-wide" %>
+    <% else %>
+      <%= button_to "アワード作成", new_treasure_box_path, method: :get, class: "btn btn-accent btn-wide" %>
+    <% end %>
+  </div>
+  <div class="my-4">
+    <%= button_to "ユーザ編集", edit_user_registration_path, method: :get, class: "btn btn-secondary btn-wide" %>
+  </div>
+  <div class="my-4">
+    <%= button_to "達成記録閲覧画面", "#", method: :get, class: "btn btn-warning btn-wide" %>
+  </div>
+
+  </div>
+</div>

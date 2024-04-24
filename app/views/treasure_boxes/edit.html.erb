@@ -1,0 +1,43 @@
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <%= image_tag 'brave.png', class: "mx-auto h-10 w-auto", size: "36x36" %>
+    <h2 class="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">アワード編集</h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
+    <p>つぎ の おたから は なんだろう ？</p>
+
+    <%= form_with model: @treasure_box, method: :patch, local: true do |f| %>
+      <div class="my-4">
+      <p>3日達成のごほうび</p>
+        <%= f.collection_check_boxes :award_ids, Award.where(required_checks: :days_3), :id, :prize do |b| %>
+          <div>
+            <%= b.label { b.check_box + b.text } %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="my-4">
+      <p>3週間達成のごほうび</p>
+        <%= f.collection_check_boxes :award_ids, Award.where(required_checks: :weeks_3), :id, :prize do |b| %>
+          <div>
+            <%= b.label { b.check_box + b.text } %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="my-4">
+      <p>3ヶ月達成のごほうび</p>
+        <%= f.collection_check_boxes :award_ids, Award.where(required_checks: :months_3), :id, :prize do |b| %>
+          <div>
+            <%= b.label { b.check_box + b.text } %>
+          </div>
+        <% end %>
+      </div>
+
+      <%= f.submit '編集する', class: "btn btn-primary" %>
+      <%= button_to "もどる", user_path(current_user), method: :get, class: "btn btn-secondary" %>
+    <% end %>
+
+  </div>
+</div>

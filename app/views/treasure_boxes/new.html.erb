@@ -1,0 +1,32 @@
+<p>アワード作成</p>
+※各期間ごとに最低2つ以上選択
+
+<%= form_with model: @treasure_box, method: :post, local: true do |f| %>
+<%= render 'shared/error_message', object: f.object %>
+<p>３日</p>
+
+<%= f.collection_check_boxes :award_ids, Award.where(required_checks: :days_3), :id, :prize do |b| %>
+    <div>
+      <%= b.label { b.check_box + b.text } %>
+    </div>
+<% end %>
+
+<p>3週間</p>
+<%= f.collection_check_boxes :award_ids, Award.where(required_checks: :weeks_3), :id, :prize do |b| %>
+    <div>
+      <%= b.label { b.check_box + b.text } %>
+    </div>
+<% end %>
+
+<p>3ヶ月</p>
+<%= f.collection_check_boxes :award_ids, Award.where(required_checks: :months_3), :id, :prize do |b| %>
+    <div>
+      <%= b.label { b.check_box + b.text } %>
+    </div>
+<% end %>
+
+<%= f.submit '作成する'%>
+
+<%= link_to "Back", :back %>
+
+<% end %>

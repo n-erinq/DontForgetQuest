@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get 'privacy_policy', to: 'static_pages#privacy_policy'
 
   resources :users, :only => [:show]
+  resources :treasure_boxes
 end
