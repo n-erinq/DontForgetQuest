@@ -1,0 +1,37 @@
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <%= image_tag 'brave.png', class: "mx-auto h-10 w-auto", size: "36x36" %>
+    <h2 class="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">チェックリスト作成</h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
+    <p>ぼうけん に たびたつ じゅんび を しよう !</p>
+
+    <%= form_with model: @check_list, method: :post, local: true do |f| %>
+      <div class="my-4">
+      <p>チェックリスト名</p>
+        <%= f.label :name %><br />
+        <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+      </div>
+
+      <div class="my-4">
+      <p>挑戦期間</p>
+        <%= f.select :period, CheckList.periods.keys.map { |k| [t("enum.check_list.period.#{k}"), k] }, { include_blank: "指定なし" }, class: "mb-3 sm:mb-0 mr-9 border border-line-200 rounded-[3px] rounded-[3px] py-3 pl-6 w-52 h-12 font-bold" %>
+      </div>
+
+      <div class="my-4">
+      <p>出かけるまえにチェックする項目</p>
+        <%= f.collection_check_boxes :check_item_ids, CheckItem.all, :id, :name do |b| %>
+          <div>
+            <%= b.label { b.check_box + b.text } %>
+          </div>
+        <% end %>
+      </div>
+
+      <%= f.submit '作成する', class: "btn btn-primary" %>
+
+      <%= link_to "Back", :back %>
+    <% end %>
+
+  </div>
+</div>

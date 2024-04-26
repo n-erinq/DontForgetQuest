@@ -7,14 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-p '==================== award create ===================='
-Award.create!(prize: "好きなコンビニスイーツを買おう", required_checks: :days_3)
-Award.create!(prize: "ちょっと高いお酒を買おう", required_checks: :days_3)
-Award.create!(prize: "何もせず寝ちゃおう", required_checks: :days_3)
-Award.create!(prize: "ちょっと良いレストランに行こう", required_checks: :weeks_3)
-Award.create!(prize: "気になる場所に行ってみよう", required_checks: :weeks_3)
-Award.create!(prize: "プチプラアクセを買おう", required_checks: :weeks_3)
-Award.create!(prize: "プチ旅行に行こう", required_checks: :months_3)
-Award.create!(prize: "新しいガジェットを買おう", required_checks: :months_3)
-Award.create!(prize: "パーティを開こう", required_checks: :months_3)
+p '==================== check_item create ===================='
+CheckItem.create!(name: "財布")
+CheckItem.create!(name: "鍵")
+CheckItem.create!(name: "携帯")
+CheckItem.create!(name: "ハンカチ")
+CheckItem.create!(name: "時計")
+CheckItem.create!(name: "部屋の電気を消す")
+CheckItem.create!(name: "洗濯機を回す")
 

@@ -1,0 +1,7 @@
+ja:
+  enums:
+    check_list:
+      period:
+        days_3: 3日
+        weeks_3: 3週間
+        months_3: 3ヶ月
