@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   resources :users, :only => [:show]
   resources :treasure_boxes
   resources :check_lists
+  resources :check_records
 end
