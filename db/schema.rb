@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_24_125405) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_27_100103) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_125405) do
     t.datetime "updated_at", null: false
     t.index ["check_item_id"], name: "index_check_lists_items_on_check_item_id"
     t.index ["check_list_id"], name: "index_check_lists_items_on_check_list_id"
+  end
+
+  create_table "check_record_items", force: :cascade do |t|
+    t.bigint "check_record_id", null: false
+    t.bigint "check_item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["check_item_id"], name: "index_check_record_items_on_check_item_id"
+    t.index ["check_record_id"], name: "index_check_record_items_on_check_record_id"
+  end
+
+  create_table "check_records", force: :cascade do |t|
+    t.bigint "check_list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["check_list_id"], name: "index_check_records_on_check_list_id"
   end
 
   create_table "treasure_box_awards", force: :cascade do |t|
@@ -78,6 +94,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_125405) do
   add_foreign_key "check_lists", "users"
   add_foreign_key "check_lists_items", "check_items"
   add_foreign_key "check_lists_items", "check_lists"
+  add_foreign_key "check_record_items", "check_items"
+  add_foreign_key "check_record_items", "check_records"
+  add_foreign_key "check_records", "check_lists"
   add_foreign_key "treasure_box_awards", "awards"
   add_foreign_key "treasure_box_awards", "treasure_boxes"
   add_foreign_key "treasure_boxes", "users"

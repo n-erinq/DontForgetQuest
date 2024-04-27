@@ -1,0 +1,22 @@
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <%= image_tag 'dog.png', class: "mx-auto h-10 w-auto", size: "36x36" %>
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">本 日 の チ ェ ッ ク</h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
+  <div class="my-4">
+  <%= form_with model: @check_record, url: check_records_path, scope: :check_record, local: true do |f| %>
+    <%= f.collection_check_boxes :check_item_ids, @check_items, :id, :name, include_hidden: false do |b| %>
+      <div>
+        <%= b.label { b.check_box + b.text } %>
+      </div>
+    <% end %>
+    <%= f.submit 'ぼうけんにでる！', class: "btn btn-primary" %>
+  <% end %>
+    </div>
+    <div class="my-4">
+    </div>
+  </div>
+</div>
