@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   root "static_pages#top"
   get 'terms', to: 'static_pages#terms'
   get 'privacy_policy', to: 'static_pages#privacy_policy'
+  get 'congratulations', to: 'static_pages#congratulations'
 
   resources :users, :only => [:show]
   resources :treasure_boxes
