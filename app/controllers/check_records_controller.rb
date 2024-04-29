@@ -1,4 +1,5 @@
 class CheckRecordsController < ApplicationController
+  before_action :authenticate_user!
 
   def new
     @user = current_user
@@ -21,7 +22,8 @@ class CheckRecordsController < ApplicationController
           redirect_needed = true
        end
        unless redirect_needed
-        redirect_to user_path(current_user), success: '本日のチェックが完了しました'
+        flash[:success] = '本日のチェックが完了しました'
+        redirect_to user_path(current_user)
        end
        else
         flash.now[:danger] = '全てチェックしよう！'

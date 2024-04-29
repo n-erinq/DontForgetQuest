@@ -1,7 +1,10 @@
 <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <h2 class="mt-20 text-center text-base font-bold leading-9 tracking-tight text-gray-900">めいん めにゅー</h2>
       <%= image_tag 'brave.png', class: "mx-auto h-10 w-auto", size: "36x36" %>
-      <h2 class="mt-10 text-center text-base font-bold leading-9 tracking-tight text-gray-900">めいん めにゅー</h2>
+
+      <%= render "shared/flash_message" %>
+
       <h2 class="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">Lv.0  はじまり の まち</h2>
   </div>
 
@@ -11,7 +14,9 @@
     <% if @check_list.present? %>
       <%= button_to "今日のチェックをする", new_check_record_path, method: :get, class: "btn btn-error btn-wide" %>
     <% else %>
+      <div class="tooltip tooltip-right" data-tip="STEP:3 ぼうけんをはじめよう！">
       <%= button_to "今日のチェックをする", edit_check_list_path, method: :get, class: "btn btn-disabled btn-wide" %>
+      </div>
     <% end %>
   </div>
 
@@ -19,7 +24,9 @@
     <% if @check_list.present? %>
       <%= button_to "チェックリスト編集", edit_check_list_path, method: :get, class: "btn btn-primary btn-wide" %>
     <% else %>
+      <div class="tooltip tooltip-right" data-tip="STEP:2 チェックするものをきめよう">
       <%= button_to "チェックリスト作成", new_check_list_path, method: :get, class: "btn btn-primary btn-wide" %>
+      </div>
     <% end %>
   </div>
 
@@ -27,7 +34,9 @@
     <% if @treasure_box.present? && !@treasure_box.opened %>
       <%= button_to "アワード編集", edit_treasure_box_path, method: :get, class: "btn btn-accent btn-wide" %>
     <% else %>
+      <div class="tooltip tooltip-right" data-tip="STEP1: ごほうびをきめよう">
       <%= button_to "アワード作成", new_treasure_box_path, method: :get, class: "btn btn-accent btn-wide" %>
+      </div>
     <% end %>
   </div>
 
@@ -37,6 +46,11 @@
   <div class="my-4">
     <%= button_to "達成記録閲覧画面(工事中)", "#", method: :get, class: "btn btn-warning btn-wide" %>
   </div>
-
+  <div class="mt-10 mb-10 flex justify-center">
+    <%= image_tag 'tree_01.png', class: "h-10 w-auto mx-2", size: "36x36" %>
+    <%= image_tag 'tree_02.png', class: "h-10 w-auto mx-2", size: "36x36" %>
+    <%= image_tag 'tree_01.png', class: "h-10 w-auto mx-2", size: "36x36" %>
+  </div>
+  </div>    
   </div>
 </div>

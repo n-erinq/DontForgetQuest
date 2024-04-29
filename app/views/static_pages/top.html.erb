@@ -1,10 +1,11 @@
-<div class="hero min-h-80 bg-base-100">
+<div class="mt-20 hero bg-base-100">
   <div class="hero-content flex-col lg:flex-row">
     <%= image_tag 'brave.png' %>
     <div>
+      <%= render "shared/flash_message" %>
       <%= image_tag 'logo.png' %>
         <div class="flex justify-center items-center gap-4">
-        <button class="btn btn-primary">ワスレナクエスト？</button>
+        <%= button_to "ワスレナクエスト？", guide_path, method: :get, class: "btn btn-primary" %>
         <%= button_to "はじめる", new_user_registration_path, method: :get, class: "btn btn-secondary" %>
         <button class="btn btn-accent">ためす(工事中)</button>
       </div>

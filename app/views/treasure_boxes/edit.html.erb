@@ -1,43 +1,61 @@
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+<div class="mt-20 flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <%= image_tag 'brave.png', class: "mx-auto h-10 w-auto", size: "36x36" %>
-    <h2 class="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">アワード編集</h2>
+  <%= image_tag 'donut.png', class: "mx-auto h-10 w-auto", size: "36x36" %>
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">アワード編集</h2>
   </div>
 
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
     <p>つぎ の おたから は なんだろう ？</p>
 
     <%= form_with model: @treasure_box, method: :patch, local: true do |f| %>
+    <%= render 'shared/error_message', object: f.object %>
+
       <div class="my-4">
-      <p>3日達成のごほうび</p>
+      <div class ="font-bold text-center">3日達成のごほうび</div>
         <%= f.collection_check_boxes :award_ids, Award.where(required_checks: :days_3), :id, :prize do |b| %>
-          <div>
-            <%= b.label { b.check_box + b.text } %>
-          </div>
+           <div class="form-control">
+                 <label class="label cursor-pointer flex items-center">
+                   <span class="label-text mr-2"><%= b.text %></span>
+                   <%= b.check_box class: "checkbox checkbox-primary" %>
+                 </label>
+               </div>
         <% end %>
       </div>
 
       <div class="my-4">
-      <p>3週間達成のごほうび</p>
+      <div class ="font-bold text-center">3週間達成のごほうび</div>
         <%= f.collection_check_boxes :award_ids, Award.where(required_checks: :weeks_3), :id, :prize do |b| %>
-          <div>
-            <%= b.label { b.check_box + b.text } %>
+            <div class="form-control">
+            <label class="label cursor-pointer flex items-center">
+              <span class="label-text mr-2"><%= b.text %></span>
+              <%= b.check_box class: "checkbox checkbox-primary" %>
+            </label>
           </div>
         <% end %>
       </div>
 
       <div class="my-4">
-      <p>3ヶ月達成のごほうび</p>
+      <div class ="font-bold text-center">3ヶ月達成のごほうび</div>
         <%= f.collection_check_boxes :award_ids, Award.where(required_checks: :months_3), :id, :prize do |b| %>
-          <div>
-            <%= b.label { b.check_box + b.text } %>
+            <div class="form-control">
+            <label class="label cursor-pointer flex items-center">
+              <span class="label-text mr-2"><%= b.text %></span>
+              <%= b.check_box class: "checkbox checkbox-primary" %>
+            </label>
           </div>
         <% end %>
       </div>
 
-      <%= f.submit '編集する', class: "btn btn-primary" %>
-      <%= button_to "もどる", user_path(current_user), method: :get, class: "btn btn-secondary" %>
+      <%= f.submit '編集する', class: "btn btn-primary btn-wide" %>
     <% end %>
-
+    <div class="field my-4">
+    <%= button_to "もどる", user_path(current_user), method: :get, class: "btn btn-secondary btn-wide" %>
+    </div>
+    <div class="mt-10 mb-10 flex justify-center">
+  <%= image_tag 'tree_01.png', class: "h-10 w-auto mx-2", size: "36x36" %>
+  <%= image_tag 'tree_02.png', class: "h-10 w-auto mx-2", size: "36x36" %>
+  <%= image_tag 'tree_01.png', class: "h-10 w-auto mx-2", size: "36x36" %>
+</div>
   </div>
 </div>

@@ -11,7 +11,8 @@ class CheckListsController < ApplicationController
     if @user && @user.check_list.nil?
       @check_list = @user.create_check_list(check_list_params)
       if @check_list.save
-        redirect_to user_path(current_user), success: 'チェックリストを作成しました'
+        flash[:success] = 'チェックリストを作成しました'
+        redirect_to user_path(current_user)
       else
         flash.now[:danger] = 'チェックリストを作成できませんでした'
         render :new, status: :unprocessable_entity
@@ -25,7 +26,8 @@ class CheckListsController < ApplicationController
 
   def update
     if @check_list.update(check_list_params)
-      redirect_to user_path(current_user), success: 'チェックリストを編集しました'
+      flash[:success] = 'チェックリストを編集しました'
+      redirect_to user_path(current_user)
     else
       flash.now[:danger] = 'チェックリストを編集できませんでした'
       render :edit, status: :unprocessable_entity

@@ -11,7 +11,8 @@ class TreasureBoxesController < ApplicationController
     if @user && @user.treasure_box.nil?
       @treasure_box = @user.create_treasure_box(treasure_box_params)
       if @treasure_box.save
-        redirect_to user_path(current_user), success: 'アワードを作成しました'
+        flash[:success] = 'アワードを作成しました'
+        redirect_to user_path(current_user)
       else
         flash.now[:danger] = 'アワードを作成できませんでした'
         render :new, status: :unprocessable_entity
@@ -25,7 +26,8 @@ class TreasureBoxesController < ApplicationController
 
   def update
     if @treasure_box.update(treasure_box_params)
-      redirect_to user_path(current_user), success: 'アワードを編集しました'
+      flash[:success] = 'アワードを編集しました'
+      redirect_to user_path(current_user)
     else
       flash.now[:danger] = 'アワードを編集できませんでした'
       render :edit, status: :unprocessable_entity
