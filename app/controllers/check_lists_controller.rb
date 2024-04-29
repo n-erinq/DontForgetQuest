@@ -2,14 +2,19 @@ class CheckListsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_check_list, only: %i[edit update]
 
+  def index
+    @user = current_user
+    @closed_check_lists = @user.check_lists.where(open: false) 
+  end
+
   def new
     @check_list = CheckList.new
   end
 
   def create
     @user = current_user
-    if @user && @user.check_list.nil?
-      @check_list = @user.create_check_list(check_list_params)
+    if @user && @user.check_lists.where(open: true).empty?
+      @check_list = @user.check_lists.new(check_list_params)
       if @check_list.save
         flash[:success] = 'チェックリストを作成しました'
         redirect_to user_path(current_user)
@@ -18,7 +23,7 @@ class CheckListsController < ApplicationController
         render :new, status: :unprocessable_entity
       end
       else
-        redirect_to root_path, alert: 'ログインしてください'
+        redirect_to root_path, alert: 'すでに開始済みのチェックリストが存在するか、ログインしてください'
     end
   end
 
@@ -41,7 +46,6 @@ class CheckListsController < ApplicationController
   end
 
   def set_check_list
-    @user = current_user
-    @check_list = @user.check_list
+    @check_list = current_user.open_check_list
   end
 end

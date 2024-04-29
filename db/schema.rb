@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_27_100103) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_29_121722) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_27_100103) do
     t.integer "period", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "open", default: true
     t.index ["user_id"], name: "index_check_lists_on_user_id"
   end
 
