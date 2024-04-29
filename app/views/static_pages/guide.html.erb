@@ -1,0 +1,22 @@
+<div class="mt-20 hero bg-base-100">
+  <div class="hero-content flex-col lg:flex-row">
+    <%= image_tag 'prince.png' %>
+    <div>
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">ワスレナクエストとは？</h2>
+        <div class="mt-10 flex flex-col justify-center items-center gap-4">
+        <p>ワスレナクエストは、
+        お出かけ前の持ち物を忘れないようサポートする</br>
+        エンジョイアプリです。冒険に出発する前の気分で、
+        RPG感覚で忘れ物チェックを</br>
+        楽しめます。目標達成の喜びを味わいながら、
+        忘れ物を撲滅していくのが目的です。</p>
+        <div class="my-4 flex flex-col items-center justify-center">
+        <%= button_to "はじめてみる", new_user_registration_path, method: :get, class: "btn btn-secondary" %>
+        <div class="my-4">
+        <%= button_to "もどる", root_path, method: :get, class: "btn btn-primary" %>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,48 +1,48 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="mt-20 flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 
-<%= form_with model: @user, url: registration_path(resource_name), local: true do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-  <%= f.label :name %><br />
-  <%= f.text_field :name, autofocus: true %>
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <%= image_tag 'chicken.png', class: "mx-auto h-10 w-auto", size: "36x36" %>
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">ユーザー編集</h2>
   </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center justify-center">
+
+    <%= form_with model: @user, url: registration_path(resource_name), local: true do |f| %>
+    <%= render "shared/error_messages", resource: resource %>
+
+    <div class="field my-4 flex items-center justify-center">
+      <%= f.text_field :name, autofocus: true, class: "input input-bordered w-full max-w-xs"%>
+    </div>
   
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="field my-4 flex items-center justify-center">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered w-full max-w-xs"%>
+    </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
+
+    <div class="field my-4 flex items-center justify-center tooltip" data-tip="パスワード変更しない場合は空欄で可">
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード", class: "input input-bordered w-full max-w-xs" %> 
+    </div>
+
+    <div class="field my-4 flex items-center justify-center">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認用)", class: "input input-bordered w-full max-w-xs"%>
+    </div>
+
+    <div class="field my-4 flex items-center justify-center tooltip" data-tip="ユーザー情報の変更に必須です">
+      <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "現在のパスワード", class: "input input-bordered w-full max-w-xs"%>
+    </div>
+
+    <div class="actions my-4 flex items-center justify-center">
+      <%= f.submit "編集する", class: "btn btn-primary btn-wide"%>
+    </div>
+  <% end %>
+    <%= button_to "もどる", user_path(current_user), method: :get, class: "btn btn-secondary btn-wide" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="mt-10 mb-10 flex justify-center">
+    <%= image_tag 'tree_01.png', class: "h-10 w-auto mx-2", size: "36x36" %>
+    <%= image_tag 'tree_02.png', class: "h-10 w-auto mx-2", size: "36x36" %>
+    <%= image_tag 'tree_01.png', class: "h-10 w-auto mx-2", size: "36x36" %>
   </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>

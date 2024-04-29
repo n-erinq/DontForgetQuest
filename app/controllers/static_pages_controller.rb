@@ -2,6 +2,7 @@ class StaticPagesController < ApplicationController
   before_action :authenticate_user!, only: [:congratulations]
 
   def top; end
+  def guide; end
   def terms; end
   def privacy_policy; end
 

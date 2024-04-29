@@ -1,16 +1,22 @@
-<h2>Forgot your password?</h2>
+<div class="mt-20 flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <%= image_tag 'lamp_demon.png', class: "mx-auto h-10 w-auto", size: "36x36" %>
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">パスワード再発行</h2>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center justify-center">
 
-<%= render "users/shared/links" %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= render "shared/error_messages", resource: resource %>
+
+        <div class="field my-4 flex items-center justify-center">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Eメール", class: "input input-bordered w-full max-w-xs"%>
+        </div>
+
+      <div class="actions my-4 flex items-center justify-center">
+        <%= f.submit "パスワード再発行", class: "btn btn-primary btn-wide" %>
+      </div>
+    <% end %>
+  </div>
+</div>
