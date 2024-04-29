@@ -3,13 +3,13 @@ class CheckRecordsController < ApplicationController
 
   def new
     @user = current_user
-    @check_list = @user.check_list
+    @check_list = @user.open_check_list
     @check_items = @check_list.check_items
   end
   
   def create
     @user = current_user
-    @check_list = @user.check_list
+    @check_list = @user.open_check_list
     @check_items = @check_list.check_items
     @check_record = @check_list.check_records.new(check_record_params)
       if @check_record.save

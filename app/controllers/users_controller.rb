@@ -2,6 +2,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @treasure_box = @user.treasure_box
-    @check_list = @user.check_list
+    @check_list = @user.open_check_list
   end
 end

@@ -8,9 +8,9 @@ class StaticPagesController < ApplicationController
 
   def congratulations
     @user = current_user
-    @check_list = @user.check_list
+    @check_list = @user.open_check_list
       
-    if @user.treasure_box.present?
+    if @user.treasure_box.present? && @check_list.present?
       if @check_list.days_3?
          @treasure_items = @user.treasure_box.awards.where('awards.required_checks = ?', Award.required_checks[:days_3])
          @random_award = @treasure_items.order("RANDOM()").first
@@ -21,6 +21,9 @@ class StaticPagesController < ApplicationController
          @treasure_items = @user.treasure_box.awards.where('awards.required_checks = ?', Award.required_checks[:months_3])
          @random_award = @treasure_items.order("RANDOM()").first
       end
+        if @random_award.present?
+          @check_list.update(open: false)
+        end
+    end
   end
- end
 end

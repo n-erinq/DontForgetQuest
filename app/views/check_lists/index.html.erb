@@ -1,0 +1,38 @@
+<div class="mt-20 flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <%= image_tag 'rosette.png', class: "mx-auto h-10 w-auto", size: "36x36" %>
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">達成記録閲覧画面</h2>
+
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center justify-center">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>チェックリスト名</th>
+          <th>挑戦期間</th>
+          <th>ステータス</th>
+        </tr>
+     </thead>
+      <tbody>
+        <% @closed_check_lists.each_with_index do |check_list, index| %>
+          <tr>
+            <th><%= index + 1 %></th>
+            <td><%= check_list.name %></td>
+            <td><%= check_list.period %></td>
+            <td><%= check_list.open ? 'Open' : 'Closed' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="field mt-10">
+      <%= button_to "もどる", user_path(current_user), method: :get, class: "btn btn-secondary btn-wide" %>
+    </div>
+   </div>
+  </div>
+  <div class="mt-10 mb-10 flex justify-center">
+    <%= image_tag 'tree_01.png', class: "h-10 w-auto mx-2", size: "36x36" %>
+    <%= image_tag 'tree_02.png', class: "h-10 w-auto mx-2", size: "36x36" %>
+    <%= image_tag 'tree_01.png', class: "h-10 w-auto mx-2", size: "36x36" %>
+  </div>
+</div>
+
