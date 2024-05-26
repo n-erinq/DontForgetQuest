@@ -51,6 +51,8 @@ gem 'devise'
 gem 'enum_help'
 gem 'rails-i18n'
 gem 'devise-i18n-views'
+gem 'httparty'
+gem 'dotenv-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

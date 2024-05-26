@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get 'terms', to: 'static_pages#terms'
   get 'privacy_policy', to: 'static_pages#privacy_policy'
   get 'congratulations', to: 'static_pages#congratulations'
+  post 'check_records/weather', to: 'check_records#weather'
 
   resources :users, :only => [:show]
   resources :treasure_boxes
