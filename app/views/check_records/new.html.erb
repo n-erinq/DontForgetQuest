@@ -7,6 +7,11 @@
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col items-center">
 
+    <div class="font-bold text-center mb-4">本日 の 天気</div>
+        <div id="weather-info">
+        <!-- 天気情報がAJAXによりここに挿入されます -->
+       </div>
+   
       <div class="my-4">
         <%= form_with model: @check_record, url: check_records_path, scope: :check_record, local: true do |f| %>
        
@@ -33,3 +38,44 @@
     </div>
   </div>
 </div>
+<script>
+document.addEventListener('turbo:load', function() {
+  function fetchWeather(latitude, longitude) {
+    fetch('/check_records/weather', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify({
+        latitude: latitude,
+        longitude: longitude
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.weather) {
+        const weatherHtml = `
+          <h4>天気: ${data.weather.description}</h4>
+          <div>気温: ${data.weather.temp_celsius}°C</div>
+          <div>湿度: ${data.weather.humidity}%</div>
+        `;
+        document.getElementById('weather-info').innerHTML = weatherHtml;
+      } else {
+        document.getElementById('weather-info').innerText = '天気情報の取得に失敗しました。';
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+
+  navigator.geolocation.getCurrentPosition(function(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    fetchWeather(latitude, longitude);
+  }, function(error) {
+    console.error("Error Code = " + error.code + " - " + error.message);
+  });
+});
+</script>

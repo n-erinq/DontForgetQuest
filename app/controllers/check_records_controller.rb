@@ -1,3 +1,8 @@
+# gem httpartyを読み込む
+require 'httparty'
+# URIモジュールを読み込む（URLのエンコードや解析に使われる）
+require 'uri'
+
 class CheckRecordsController < ApplicationController
   before_action :authenticate_user!
 
@@ -31,9 +36,55 @@ class CheckRecordsController < ApplicationController
       end
   end
 
+  def weather
+    latitude = params[:latitude]
+    longitude = params[:longitude]
+
+    response = WeatherService.new(latitude, longitude).fetch_weather
+    if response.success?
+      weather_data = response.parsed_response
+      weather = {
+        name: weather_data["name"],
+        temp_celsius: weather_data["main"]["temp"].round(1),
+        temp_min_celsius: weather_data["main"]["temp_min"].round(2),
+        temp_max_celsius: weather_data["main"]["temp_max"].round(2),
+        humidity: weather_data["main"]["humidity"],
+        description: weather_data["weather"][0]["description"]
+      }
+      render json: { weather: weather }
+    else
+      render json: { error: "Unable to fetch weather data" }, status: :bad_request
+    end
+
+  end
+   
   private
 
   def check_record_params
     params.require(:check_record).permit(check_item_ids: [])
+  end
+
+  def kelvin_to_celsius(kelvin)
+    kelvin - 273.15
+  end
+
+end
+
+class WeatherService
+  # HTTPartyモジュールをWeatherServiceクラスにインクルード
+  include HTTParty
+  # OpenWeatherMap APIのベースURIを設定
+  base_uri 'api.openweathermap.org'
+
+  def initialize(latitude, longitude)
+    # 環境変数からOpenWeatherMapのAPIキーを取得
+    api_key = ENV['OPENWEATHERMAP_API_KEY']
+    # APIリクエストのためのオプションを設定
+    @options = { query: { lat: latitude, lon: longitude, appid: api_key, lang: 'ja', units: 'metric' } }
+  end
+
+  def fetch_weather
+    # HTTPartyによって提供されるgetメソッドをクラスメソッドとして呼び出す
+    self.class.get("/data/2.5/weather", @options)
   end
 end

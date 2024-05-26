@@ -5,7 +5,8 @@ services:
     restart: always
     environment:
       TZ: Asia/Tokyo
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pass
     volumes:
       - postgresql_data:/var/lib/postgresql
     ports:
